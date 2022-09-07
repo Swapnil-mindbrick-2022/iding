@@ -56,7 +56,8 @@ const upload = async (req, res) => {
 const getTutorials = (req, res) => {
   Tutorial.findAll()
     .then((data) => {
-      res.send(data);
+      // res.send(data);
+      res.render('alldata.ejs',{'data': data});
       
     })
     .catch((err) => {

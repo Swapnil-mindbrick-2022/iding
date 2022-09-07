@@ -1,67 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Registration</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-	</script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="./css/index.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
 
+.input-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
 
-	<script type="text/javascript" >
-		loginbtn = document.getElementById('loginbtn')
+.icon {
+  padding: 10px;
+  background: dodgerblue;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
 
-	
-  
+.input-field {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+}
 
+.input-field:focus {
+  border: 2px solid dodgerblue;
+}
 
-		function myfunction() {
-			alert("form submit Successfully");
-		}
+/* Set a style for the submit button */
+.btn {
+  background-color: dodgerblue;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
 
-	</script>
+.btn:hover {
+  opacity: 1;
+}
+</style>
 </head>
 <body>
 
+<form action="/api/register" style="max-width:500px;margin:auto" method="POST">
+  <h2>Register </h2>
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Fullname" name="fullname">
+  </div>
 
+  <div class="input-container">
+    <i class="fa fa-envelope icon"></i>
+    <input class="input-field" type="text" placeholder="Email" name="emailid">
+  </div>
+  <div class="input-container">
+    <i class="fa fa-calendar icon"></i>
+    <input class="input-field" type="date" placeholder="dob" name="dob">
+  </div>
 
+  <div class="input-container">
+    <i class="fa fa-key icon"></i>
+    <input class="input-field" type="password" placeholder="Password" name="password">
+  </div>
 
-	<h1>Registration form</h1>
-	<div class="form-container">
-<form action ='/'method='post' name="registerForm" id="form1" onsubmit='myfunction()'enctype="multipart/form-data">
-		<label for="firstName">full Name *</label>
-		<input type="text" id="fullname" name="fullname" placeholder="" required/>
-        <p class="error-message"></p>
-        <label for="e-mail">E-mail address *</label>
-		<input type="text" id="e-mail" name="emailid" placeholder="john-doe@net.com" required/>
-		<p class="error-message"></p>
-	
-		<label for="e-mail">Date of birth *</label>
-		<input type ='date'id ="date_of_birth"name='dob' placeholder="date_of_birth"required/>
-		<p class="error-message"></p>
-		<label for="e-mail">Password*</label>
-		<input  type ='password' id ="password" name='password' placeholder=" " required="" />
-		<p class="error-message"></p>
-		
-
-		
-
-
-
-		<input id="loginbtn" class="button" type="submit" value="submit" name="submit" /><a href="/login" ></a>
-		</div>
-		
-
+  <button type="submit" class="btn">Register</button>
 </form>
-<div class="mssg bg-danger">
-	<span id="check"></span>
-</div>
-<div>
-	<span>Already Registered! <a href="/login">Login</a></span>
-</div>
-<div id="LangTable"><a href="/login" id="aa"></a>
-</div>
-</div>
+
 </body>
 </html>

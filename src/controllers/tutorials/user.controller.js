@@ -15,7 +15,7 @@ const user = db.users
 // }
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.fullname) {
+    if (!req.body.emailid || !req.body.fullname || !req.body.password || !req.body.dob ) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
@@ -33,7 +33,8 @@ exports.create = (req, res) => {
     // Save Tutorial in the database
     user.create(userdata)
       .then(data => {
-        res.send(data);
+        // res.send(data);
+        res.render('register.ejs')
       })
       .catch(err => {
         res.status(500).send({
@@ -44,24 +45,38 @@ exports.create = (req, res) => {
   }
 
 
-  exports.registerpage = (req,res)=>{
-    res.render(path.join(__dirname, "./views/register.ejs"));
-  }
-//   function getuserdata() {
-//     return{
-//         async getregister (req,res){
-//             res.render('register.ejs')
+  exports.login = (req, res) => {
+    const id = req.body.id;
+    if(!id){
+      res.status(400).send({
+        message: "Content can not be empty!"
+      });
+      
 
+    }else{
+      user.findByPk(id)
+      .then(data => {
+        if (data) {
+          res.send(data);
+        } else {
+          res.status(404).send({
+            message: `Cannot find Tutorial with id=${id}.`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error retrieving Tutorial with id=" + id
+        });
+      });
 
-//         }
-
-//     }
-   
-
-//     }
-
-// module.exports = getuserdata;
+    }
   
+  };
+
+
+
+
 
 
 

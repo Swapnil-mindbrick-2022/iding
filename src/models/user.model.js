@@ -7,17 +7,22 @@ module.exports = (sequelize, Sequelize) => {
     },
    
     fullname: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      required: true
     },
     emailid: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      required: true
     },
     dob: {
-      type: Sequelize.DATE
+      type: Sequelize.DATE,
+      required: true
     },
    
     password:{
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      required: true
+
     }
   })
   

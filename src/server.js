@@ -17,9 +17,7 @@ app.set('view engine', 'ejs');
 app.get("/data", function (req, res) {
   res.render(path.join(__dirname, "./views/index.ejs"));
 });
-app.get("/register", function (req, res) {
-  res.render(path.join(__dirname, "./views/register.ejs"));
-});
+
 
 
 
