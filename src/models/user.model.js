@@ -1,3 +1,4 @@
+const Sequelize = require("sequelize");
 module.exports = (sequelize, Sequelize) => {
   const user = sequelize.define("userdata",{
     id:{
@@ -10,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       required: true
     },
-    emailid: {
+    username: {
       type: Sequelize.STRING,
       required: true
     },
@@ -25,10 +26,6 @@ module.exports = (sequelize, Sequelize) => {
 
     }
   })
-  
-
-
   return user;
-  
 
 };

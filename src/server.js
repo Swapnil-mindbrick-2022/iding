@@ -3,16 +3,44 @@ const express = require("express");
 const app = express();
 const db = require("./models");
 const path = require('path');
-const initRoutes = require("./routes/tutorial.routes");
+const initRoutes = require("./routes/user.js");
 global.__basedir = __dirname + "/..";
-
+const passport = require('passport')
 const  bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+const session = require('express-session')
+const mysql = require('mysql2')
+const {initializingPassport} = require('./config/passportConfig.js')
+var MySQLStore = require('express-mysql-session')(session)
 app.set('views', path.join(__dirname, 'views'));
+
 
 app.set('view engine', 'ejs');	
 // app.use(express.urlencoded({ extended: true }));
+
+db.sequelize.sync();
+// const mydb = {
+//   HOST: "localhost",
+//   USER: "root",
+//   PASSWORD: "Shubham@1",
+//   DB: "mbtest2",
+//   dialect: "mysql",
+//   port:3306
+// }
+const sessionStore = new MySQLStore(db);
+
+
+app.use(session({
+	key: 'secretkey',
+	secret: 'secret',
+	store: sessionStore,
+	resave: false,
+	saveUninitialized: false
+}));
+initializingPassport(passport)
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.get("/data", function (req, res) {
   res.render(path.join(__dirname, "./views/index.ejs"));
@@ -20,13 +48,17 @@ app.get("/data", function (req, res) {
 
 
 
-
-
 initRoutes(app);
-db.sequelize.sync();
-// db.sequelize.sync({ force: true }).then(() => {
-//   console.log("Drop and re-sync db.");
-// });
+
+
+
+
+
+
+
+
+
+
 let port = 3001;
 app.listen(port, () => {
   console.log(`Running at localhost:${port}`);
